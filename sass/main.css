@@ -1,0 +1,890 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+}
+@media only screen and (max-width: 81.25em) {
+  html {
+    font-size: 50%;
+  }
+}
+
+body {
+  background-color: #262a56;
+  color: #e3ccae;
+  font-family: "Geologica", sans-serif;
+  line-height: 1.6rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Righteous", cursive;
+  color: #262a56;
+}
+
+.container {
+  display: grid;
+  grid-template-rows: 95vh min-content 40vw repeat(3, min-content);
+  grid-template-columns: [sidebar-start] 10rem [sidebar-end full-start] minmax(5rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 15rem) [col-end]) [center-end] minmax(5rem, 1fr) [full-end];
+}
+@media only screen and (max-width: 68.75em) {
+  .container {
+    grid-template-rows: 6rem 95vh min-content 40vw repeat(3, min-content);
+    grid-template-columns: [full-start] minmax(5rem, 1fr) [center-start] repeat(8, [col-start] minmax(min-content, 15rem) [col-end]) [center-end] minmax(5rem, 1fr) [full-end];
+  }
+}
+@media only screen and (max-width: 50em) {
+  .container {
+    grid-template-rows: 6rem calc(100vh - 6rem);
+  }
+}
+
+@keyframes background {
+  0% {
+    background-position: 7% 0%;
+  }
+  50% {
+    background-position: 94% 100%;
+  }
+  100% {
+    background-position: 7% 0%;
+  }
+}
+@keyframes icons {
+  0% {
+    transform: scale(1) translateX(0) translateY(0);
+  }
+  50% {
+    transform: scale(1.02) translateX(-0.2rem) translateY(0.2rem);
+  }
+  100% {
+    transform: scale(1) translateX(0) translateY(0);
+  }
+}
+@keyframes click {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(2rem);
+  }
+}
+.album__popup {
+  background-color: rgba(0, 0, 0, 0.55);
+  -webkit-backdrop-filter: blur(3px);
+          backdrop-filter: blur(3px);
+  margin: auto;
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 25;
+  opacity: 0;
+  display: none;
+  visibility: hidden;
+  transition: all 1s;
+  cursor: pointer;
+}
+.album__popup--content {
+  background-color: #000000;
+  font-size: 1.5rem;
+  line-height: 3rem;
+  text-align: center;
+  list-style-position: inside;
+  margin: 5% 25%;
+  padding: 5%;
+  position: relative;
+  transform: translate(10%, 10%);
+  box-shadow: 0.2rem 0.7rem 4rem rgba(80, 0, 0, 0.9);
+  border-radius: 1rem;
+}
+.album__popup--close {
+  text-decoration: none;
+  text-shadow: 0 0.11rem 0.3rem #c0c0c0;
+  position: absolute;
+  font-size: 2rem;
+  top: 2rem;
+  right: 2rem;
+  transition: all 0.4s;
+}
+.album__popup--close:hover {
+  color: #500000;
+  font-size: 3rem;
+}
+.album__popup:target {
+  opacity: 1;
+  visibility: visible;
+  display: block;
+}
+
+.album__title {
+  color: #3f0071;
+  text-shadow: 0 0.1rem 0.2rem rgba(241, 240, 238, 0.897);
+  font-size: 5rem;
+  font-family: "Moonlight";
+  margin-bottom: 4rem;
+}
+.album__list--song {
+  color: #a80101;
+  font-family: "Righteous", cursive;
+  font-size: 1.7rem;
+  transition: all 1s;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+.album__list--song:hover {
+  color: #140149;
+  text-shadow: 0 0.1rem 0.2rem rgba(241, 240, 238, 0.897);
+  transform: translateY(-0.3rem) translateX(1.7rem);
+  font-size: 2rem;
+}
+
+@font-face {
+  font-family: "Moonlight";
+  src: url(../fonts/Moonlightshadow.ttf);
+}
+@font-face {
+  font-family: "EvilSound";
+  src: url(../fonts/EvilSound.ttf);
+}
+@font-face {
+  font-family: "Lanarka";
+  src: url(../fonts/Lanarka.ttf);
+}
+.albums {
+  background-color: #262a56;
+  grid-column: center-start/center-end;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-gap: 6rem;
+}
+@media only screen and (max-width: 62.5em) {
+  .albums {
+    margin: 5rem;
+  }
+}
+
+.album {
+  background-color: #140149;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 3rem;
+  border-radius: 0.2rem;
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+  position: relative;
+  transition: all 0.7s;
+}
+@media only screen and (max-width: 50em) {
+  .album {
+    margin: 2rem;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .album {
+    margin: 5rem;
+  }
+}
+.album:hover {
+  transform: translateY(-1rem);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.6);
+}
+.album__pic {
+  border-radius: 0.2rem;
+  width: 100%;
+  grid-row: 1/2;
+  grid-column: 1/-1;
+  z-index: 1;
+}
+.album__ticket {
+  grid-row: 1/2;
+  grid-column: 2/3;
+  fill: #cc9900;
+  height: 5rem;
+  width: 5rem;
+  z-index: 2;
+  justify-self: end;
+  margin: 1rem;
+}
+.album__name {
+  grid-column: 1/-1;
+  grid-row: 1/2;
+  z-index: 3;
+  width: 80%;
+  justify-self: center;
+  align-self: end;
+  font-family: "Metal Mania", cursive;
+  font-size: 2.5rem;
+  text-align: center;
+  padding: 2rem 0.5rem;
+  background-image: linear-gradient(to bottom left, #140149, #500000);
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+  border-radius: 0.5rem;
+  color: #b8621b;
+  text-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+  font-weight: 300;
+  transform: translateY(50%);
+}
+.album__band, .album__country {
+  margin-top: 2.5rem;
+}
+.album__band, .album__country, .album__genre, .album__info {
+  font-size: 1.5rem;
+  font-weight: 200;
+  margin-left: 1rem;
+}
+.album__band svg, .album__country svg, .album__genre svg, .album__info svg {
+  fill: url(#album-gradient);
+  height: 2.5rem;
+  width: 2.5rem;
+}
+.album__btn {
+  grid-column: 1/-1;
+  justify-self: center;
+  width: 100%;
+}
+.album__link {
+  grid-column: 1/-1;
+  justify-self: center;
+  width: 80%;
+}
+
+.features {
+  background-color: #262a56;
+  margin: 10rem 0;
+  display: grid;
+  grid-column: center-start/center-end;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-column-gap: 4rem;
+  grid-row-gap: 6rem;
+  align-items: start;
+}
+@media only screen and (max-width: 62.5em) {
+  .features {
+    margin-top: 5rem;
+  }
+}
+@media only screen and (max-width: 50em) {
+  .features {
+    padding: 1rem 3rem;
+  }
+}
+
+.feature {
+  display: grid;
+  grid-template-columns: min-content 1fr;
+  grid-row-gap: 1.5rem;
+  grid-column-gap: 2.5rem;
+}
+.feature__icon {
+  fill: url(#my-cool-gradient);
+  width: 5.5rem;
+  height: 5.5rem;
+  grid-row: 1/span 2;
+  transform: translateY(-0.2rem);
+  transition: all 0.7s;
+  animation: icons 5s infinite;
+}
+@media only screen and (max-width: 50em) {
+  .feature__icon {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+.feature__text {
+  font-size: 1.7rem;
+  font-family: "Geologica";
+  font-weight: 100;
+}
+
+.footer {
+  background-color: #000000;
+  grid-column: full-start/full-end;
+  padding: 4rem;
+}
+
+.nav {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-gap: 3rem;
+  align-items: center;
+}
+@media only screen and (max-width: 62.5em) {
+  .nav {
+    grid-template-columns: repeat(auto-fit, minmax(8rem, 1fr));
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .nav {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+.nav__link:link, .nav__link:visited {
+  font-size: 1.7rem;
+  font-weight: 100;
+  font-family: "Metal Mania", cursive;
+  text-decoration: none;
+  color: #c0c0c0;
+  text-align: center;
+  padding: 2rem;
+  display: block;
+  border-radius: 0.2rem;
+  transition: all 1.5s;
+}
+.nav__link:hover, .nav__link:active {
+  box-shadow: 0 0.1rem 0.5rem rgba(241, 240, 238, 0.212);
+  background-color: rgba(255, 255, 255, 0.05);
+  transform: translateY(0.5rem);
+}
+
+.copyright {
+  font-size: 1.3rem;
+  color: #500000;
+  margin-top: 4rem;
+  text-align: center;
+  width: 60%;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.gallery {
+  background-color: #080c33;
+  grid-column: full-start/full-end;
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  grid-template-rows: repeat(8, 12vw);
+  grid-gap: 1.5rem;
+  padding: 1.5rem;
+}
+@media only screen and (max-width: 62.5em) {
+  .gallery {
+    margin-top: 5rem;
+  }
+}
+.gallery__item {
+  position: relative;
+}
+.gallery__item--caption {
+  font-family: "Righteous", cursive;
+  font-size: 2rem;
+  line-height: 2rem;
+  color: #b8621b;
+  text-shadow: -1px 0 #e3ccae, 0 1px #e3ccae, 1px 0 #e3ccae, 0 -1px #e3ccae;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) translateY(10rem);
+  opacity: 0;
+  visibility: hidden;
+  transition: all 2s;
+  backface-visibility: hidden;
+}
+.gallery__item--1 {
+  grid-row: 1/1;
+  grid-column: 1/3;
+}
+.gallery__item--2 {
+  grid-row: 1/span 2;
+  grid-column: 3/6;
+}
+.gallery__item--3 {
+  grid-row: 1/3;
+  grid-column: 6/-1;
+}
+.gallery__item--4 {
+  grid-row: 2/4;
+  grid-column: 1/3;
+}
+.gallery__item--5 {
+  grid-row: 3/4;
+  grid-column: 3/5;
+}
+.gallery__item--6 {
+  grid-row: 3/5;
+  grid-column: 5/7;
+}
+.gallery__item--7 {
+  grid-row: 4/6;
+  grid-column: 1/4;
+}
+.gallery__item--8 {
+  grid-row: 3/5;
+  grid-column: 7/-1;
+}
+.gallery__item--9 {
+  grid-row: 4/5;
+  grid-column: 4/5;
+}
+.gallery__item--10 {
+  grid-row: 5/8;
+  grid-column: 4/7;
+}
+.gallery__item--11 {
+  grid-row: 5/7;
+  grid-column: 7/9;
+}
+.gallery__item--12 {
+  grid-row: 7/9;
+  grid-column: 1/4;
+}
+.gallery__item--13 {
+  grid-row: 7/-1;
+  grid-column: 8/-1;
+}
+.gallery__item--14 {
+  grid-row: 6/7;
+  grid-column: 1/3;
+}
+.gallery__item--15 {
+  grid-row: 8/9;
+  grid-column: 4/6;
+}
+.gallery__item--16 {
+  grid-row: 5/6;
+  grid-column: 9/-1;
+}
+.gallery__item--17 {
+  grid-row: 6/7;
+  grid-column: 9/-1;
+}
+.gallery__item--18 {
+  grid-row: 6/7;
+  grid-column: 3/4;
+}
+.gallery__item--19 {
+  grid-row: 8/-1;
+  grid-column: 6/8;
+}
+.gallery__image {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  display: block;
+  border-radius: 0.2rem;
+  position: relative;
+  transition: all 1s;
+}
+.gallery__image:hover {
+  transform: scale(1.02);
+  box-shadow: 0.3rem 0.3rem 2rem rgba(184, 98, 27, 0.8);
+  filter: grayscale(0.5) sepia(0.5) brightness(0.8) invert(0.2) blur(0.5px);
+}
+
+.gallery__item:hover .gallery__item--caption {
+  transform: translate(-50%, -50%);
+  visibility: visible;
+  opacity: 1;
+}
+
+.header {
+  background-color: #000000;
+  grid-column: full-start/col-end 6;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
+          clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
+  background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.95)), url(../img/hero.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 8rem;
+  padding-top: 4rem;
+  display: grid;
+  grid-template-rows: 1fr min-content minmax(6rem, min-content) 1fr;
+  grid-template-columns: minmax(min-content, max-content);
+  grid-row-gap: 1.5rem;
+  justify-content: center;
+}
+@media only screen and (max-width: 62.5em) {
+  .header {
+    grid-column: 1/-1;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .header {
+    padding: 4rem;
+    grid-template-rows: minmax(6rem, min-content) min-content minmax(6rem, min-content) minmax(8rem, min-content) min-content;
+  }
+}
+.header__logo {
+  height: 6rem;
+  justify-self: center;
+}
+.header__heading-1 {
+  font-size: 3rem;
+  font-family: "Metal Mania", cursive;
+  text-align: center;
+  margin-top: 2rem;
+}
+@media only screen and (max-width: 37.5em) {
+  .header__heading-1 {
+    font-size: 2.5rem !important;
+  }
+}
+.header__heading-3 {
+  font-size: 6rem !important;
+}
+@media only screen and (max-width: 62.5em) {
+  .header__heading-3 {
+    font-size: 4rem !important;
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .header__heading-3 {
+    font-size: 3.5rem !important;
+  }
+}
+.header__btn {
+  align-self: center;
+  justify-self: center;
+  padding: 1rem 2rem !important;
+  box-shadow: 0.15rem 0.15rem 0.15rem #925f00 !important;
+}
+.header__btn:hover {
+  box-shadow: 0.2rem 0.5rem 0.5rem #925f00 !important;
+}
+.header__btn:link, .header__btn:active {
+  box-shadow: 0.15rem 0.15rem 0.15rem #925f00 !important;
+}
+.header__heardon-text {
+  display: grid;
+  grid-template-columns: 1fr max-content 1fr;
+  grid-column-gap: 1.5rem;
+  align-items: center;
+  font-size: 1.6rem;
+  color: #c0c0c0;
+}
+.header__heardon-text::before, .header__heardon-text::after {
+  content: "";
+  height: 1px;
+  display: block;
+  background-color: currentColor;
+}
+.header__heardon-logos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-column-gap: 3rem;
+  justify-items: center;
+}
+@media only screen and (max-width: 37.5em) {
+  .header__heardon-logos {
+    grid-template-columns: auto;
+  }
+}
+.header__heardon-logos img {
+  max-height: 6rem;
+  max-width: 100%;
+  filter: brightness(70%);
+}
+
+.sidebar {
+  background-color: #cc9900;
+  grid-column: sidebar-start/sidebar-end;
+  grid-row: 1/-1;
+  display: flex;
+  justify-content: center;
+}
+@media only screen and (max-width: 68.75em) {
+  .sidebar {
+    grid-column: 1/-1;
+    grid-row: 1/2;
+    justify-content: flex-end;
+    align-items: center;
+  }
+}
+
+.nav-btn {
+  border: none;
+  border-radius: 0;
+  background-color: #000000;
+  height: 2px;
+  width: 3.5rem;
+  margin-top: 3.5rem;
+  cursor: pointer;
+}
+@media only screen and (max-width: 68.75em) {
+  .nav-btn {
+    height: 1px;
+  }
+}
+.nav-btn::before, .nav-btn::after {
+  background-color: #000000;
+  height: 0.2rem;
+  width: 3.5rem;
+  content: "";
+  display: block;
+  cursor: pointer;
+}
+.nav-btn::before {
+  transform: translateY(-1rem);
+}
+.nav-btn::after {
+  transform: translateY(0.9rem);
+}
+@media only screen and (max-width: 68.75em) {
+  .nav-btn {
+    margin-top: 0;
+    margin-right: 3rem;
+    height: 0.1rem;
+  }
+  .nav-btn::before {
+    transform: translateY(-0.8rem);
+  }
+  .nav-btn::after {
+    transform: translateY(0.7rem);
+  }
+}
+
+.singers {
+  background-color: #080c33;
+  font-family: "BlackDahlia";
+  grid-column: col-start 7/full-end;
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 0 95%);
+          clip-path: polygon(0 0, 100% 0, 100% 90%, 0 95%);
+  position: relative;
+  top: 0;
+  left: -0.05rem;
+  padding: 3rem;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  grid-row-gap: 2rem;
+}
+@media only screen and (max-width: 62.5em) {
+  .singers {
+    grid-column: 1/-1;
+    padding: 12rem 0 9rem 0;
+    margin-top: -4.2rem;
+    z-index: -1;
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
+            clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
+  }
+}
+@media only screen and (max-width: 37.5em) {
+  .singers {
+    margin-top: -4rem;
+    padding: 15rem 0 9rem 0;
+  }
+}
+.singers__heading {
+  color: #500000;
+  font-family: "EvilSound";
+  font-size: 3rem;
+  font-weight: 200;
+  margin-top: -5rem;
+  text-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+}
+.singers__list {
+  display: grid;
+  grid-template-columns: min-content max-content;
+  grid-column-gap: 2rem;
+  grid-row-gap: 5vh;
+  align-items: center;
+}
+@media only screen and (max-width: 62.5em) {
+  .singers__list {
+    grid-template-columns: repeat(3, min-content 20rem);
+  }
+}
+@media only screen and (max-width: 50em) {
+  .singers__list {
+    grid-template-columns: min-content max-content;
+  }
+}
+.singers__img {
+  width: 9rem;
+  border-radius: 50%;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.6);
+  display: block;
+  transition: all 1.7s cubic-bezier(0.64, 0.34, 0.21, 1.88);
+}
+.singers__img:hover {
+  transform: scale(1.1) rotate(5deg);
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+}
+.singers__fame {
+  text-transform: uppercase;
+  color: #b8621b;
+  font-family: "Geologica", sans-serif;
+}
+
+.story__pictures {
+  background-image: linear-gradient(270deg, rgba(38, 42, 86, 0.8), rgba(8, 12, 51, 0.7)), url(../img/norway.jpg);
+  grid-column: full-start/col-end 4;
+  background-size: cover;
+  display: grid;
+  align-items: center;
+  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+}
+@media only screen and (max-width: 62.5em) {
+  .story__pictures {
+    grid-column: 1/-1;
+    padding: 5rem;
+  }
+}
+.story__img--1 {
+  width: 90%;
+  grid-row: 2/6;
+  grid-column: 2/6;
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+  transition: all 1.5s cubic-bezier(0.08, 1.29, 0.83, -1.56);
+}
+@media only screen and (max-width: 62.5em) {
+  .story__img--1 {
+    grid-column: 2/6;
+    width: 80%;
+  }
+}
+.story__img--1:hover {
+  transform: scale(0.9);
+}
+.story__img--2 {
+  width: 125%;
+  grid-row: 4/6;
+  grid-column: 4/7;
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+  z-index: 20;
+  transition: all 2s cubic-bezier(0.78, 0.09, 0.83, -1.56);
+}
+@media only screen and (max-width: 62.5em) {
+  .story__img--2 {
+    grid-row: 1/-1;
+    width: 100%;
+  }
+}
+.story__img--2:hover {
+  transform: scale(1.1);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.6);
+}
+.story__content {
+  background-color: #3f0071;
+  grid-column: col-start 5/full-end;
+  padding: 6rem 8vw;
+  display: grid;
+  align-content: center;
+  justify-items: center;
+}
+@media only screen and (max-width: 62.5em) {
+  .story__content {
+    grid-column: 1/-1;
+    grid-row: 5/6;
+  }
+}
+.story__text {
+  font-size: 1.5rem;
+  font-style: italic;
+}
+
+.heading-2 {
+  font-family: "Metal Mania", cursive;
+  font-weight: 300;
+  font-size: 4rem;
+  text-align: center;
+  line-height: 3.5rem;
+}
+.heading-2--dark {
+  color: #a80101;
+  text-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+}
+
+.heading-3 {
+  font-size: 3rem;
+  font-family: "EvilSound";
+  font-weight: 200;
+  text-align: center;
+  color: #cc9900;
+  line-height: 2;
+  text-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+}
+
+.heading-4--light {
+  color: #b8621b;
+  font-family: "Metal Mania", cursive;
+  font-size: 2.2rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.4rem;
+  text-shadow: 0 0.1rem 0.2rem rgba(241, 240, 238, 0.897);
+}
+@media only screen and (max-width: 50em) {
+  .heading-4--light {
+    font-size: 1.8rem;
+  }
+}
+.heading-4--dark {
+  font-family: "Metal Mania", cursive;
+  font-size: 2.2rem;
+  line-height: 2.5rem;
+  letter-spacing: 0.4rem;
+  text-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+}
+@media only screen and (max-width: 50em) {
+  .heading-4--dark {
+    font-size: 1.8rem;
+  }
+}
+
+.btn {
+  background-image: linear-gradient(to top right, #870000, #190a05);
+  color: #cc9900;
+  border-radius: 0.3rem;
+  border: none;
+  font-family: "Righteous", cursive;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding: 2rem 3rem;
+  cursor: pointer;
+  text-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+  transition: all 0.4s;
+  backface-visibility: hidden;
+}
+.btn:hover {
+  background-image: linear-gradient(to left bottom, #870000, #190a05);
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.6);
+  transform: translateY(-3px);
+}
+.btn:active, .btn:visited {
+  transform: translateY(1px);
+  box-shadow: 0 0.2rem 1rem rgba(0, 0, 0, 0.8);
+}
+.btn a {
+  text-decoration: none;
+  color: #cc9900;
+}
+.btn a:hover {
+  color: #a80101;
+}
+
+.mb-sm {
+  margin-bottom: 2rem;
+}
+
+.mb-md {
+  margin-bottom: 3rem;
+}
+
+.mb-lg {
+  margin-bottom: 4rem;
+}
+
+.mb-hg {
+  margin-bottom: 8rem;
+}
+@media only screen and (max-width: 62.5em) {
+  .mb-hg {
+    margin-bottom: 0;
+  }
+}/*# sourceMappingURL=main.css.map */

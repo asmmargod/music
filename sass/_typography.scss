@@ -1,0 +1,114 @@
+.heading-1 {
+}
+
+.heading-2 {
+  font-family: $font-headers;
+  font-weight: 300;
+  font-size: 4rem;
+  text-align: center;
+  line-height: 3.5rem;
+
+  &--light {
+  }
+
+  &--dark {
+    color: $color-red;
+    text-shadow: $shadow-black;
+  }
+}
+
+.heading-3 {
+  font-size: 3rem;
+  font-family: "EvilSound";
+  font-weight: 200;
+  text-align: center;
+  color: $color-background-gold;
+  line-height: 2;
+  text-shadow: $shadow-black;
+}
+
+.heading-4 {
+  &--light {
+    color: $color-font-dark;
+    font-family: $font-headers;
+    font-size: 2.2rem;
+
+    line-height: 2.5rem;
+    letter-spacing: 0.4rem;
+    text-shadow: $shadow-cream;
+    @media only screen and (max-width: $bp-medium-1) {
+      font-size: 1.8rem;
+    }
+  }
+
+  &--dark {
+    font-family: $font-headers;
+    font-size: 2.2rem;
+    line-height: 2.5rem;
+    letter-spacing: 0.4rem;
+    text-shadow: $shadow-black;
+    @media only screen and (max-width: $bp-medium-1) {
+      font-size: 1.8rem;
+    }
+  }
+}
+
+//btn
+
+.btn {
+  background-image: linear-gradient(to top right, #870000, #190a05);
+  color: $color-background-gold;
+  border-radius: 0.3rem;
+  border: none;
+  font-family: $font-title;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  padding: 2rem 3rem;
+  cursor: pointer;
+  text-shadow: $shadow-black;
+  box-shadow: $shadow-black;
+  transition: all 0.4s;
+  backface-visibility: hidden;
+
+  &:hover {
+    background-image: linear-gradient(to left bottom, #870000, #190a05);
+    box-shadow: $shadow-black-big;
+    transform: translateY(-3px);
+  }
+
+  &:active,
+  &:visited {
+    transform: translateY(1px);
+    box-shadow: $shadow-black;
+  }
+
+  a {
+    text-decoration: none;
+    color: $color-background-gold;
+
+    &:hover {
+      color: $color-red;
+    }
+  }
+}
+
+//Margins bottom classes
+.mb-sm {
+  margin-bottom: 2rem;
+}
+
+.mb-md {
+  margin-bottom: 3rem;
+}
+
+.mb-lg {
+  margin-bottom: 4rem;
+}
+
+.mb-hg {
+  margin-bottom: 8rem;
+
+  @media only screen and (max-width: $bp-medium) {
+    margin-bottom: 0;
+  }
+}

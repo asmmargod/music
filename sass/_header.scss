@@ -1,0 +1,104 @@
+.header {
+  background-color: $color-primary;
+  grid-column: full-start/ col-end 6;
+  clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
+  background-image: linear-gradient(to bottom right, rgba($color-primary, 0.9), rgba($color-primary, 0.95)), url(../img/hero.jpg);
+  background-size: cover;
+  background-position: center;
+  padding: 8rem;
+  padding-top: 4rem;
+
+  display: grid;
+  //minmax for responsivness
+  grid-template-rows: 1fr min-content minmax(6rem, min-content) 1fr;
+  //minmax solution for responsivness
+  grid-template-columns: minmax(min-content, max-content);
+  grid-row-gap: 1.5rem;
+  justify-content: center;
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-column: 1 / -1;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    padding: 4rem;
+    grid-template-rows: minmax(6rem, min-content) min-content minmax(6rem, min-content) minmax(8rem, min-content) min-content;
+  }
+
+  &__logo {
+    height: 6rem;
+    justify-self: center;
+  }
+
+  &__heading-1 {
+    font-size: 3rem;
+    font-family: $font-headers;
+    text-align: center;
+    margin-top: 2rem;
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 2.5rem !important;
+    }
+  }
+
+  &__heading-3 {
+    font-size: 6rem !important;
+
+    @media only screen and (max-width: $bp-medium) {
+      font-size: 4rem !important;
+    }
+
+    @media only screen and (max-width: $bp-small) {
+      font-size: 3.5rem !important;
+    }
+  }
+
+  &__btn {
+    align-self: center;
+    justify-self: center;
+    padding: 1rem 2rem !important;
+    box-shadow: 0.15rem 0.15rem 0.15rem rgba($color: #925f00d5, $alpha: 1) !important;
+
+    &:hover {
+      box-shadow: 0.2rem 0.5rem 0.5rem rgba($color: #925f00d5, $alpha: 1) !important;
+    }
+    &:link,
+    &:active {
+      box-shadow: 0.15rem 0.15rem 0.15rem rgba($color: #925f00d5, $alpha: 1) !important;
+    }
+  }
+
+  &__heardon-text {
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    grid-column-gap: 1.5rem;
+    align-items: center;
+    font-size: 1.6rem;
+    color: $color-silver;
+
+    &::before,
+    &::after {
+      content: "";
+      height: 1px;
+      display: block;
+      background-color: currentColor;
+    }
+  }
+
+  &__heardon-logos {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-column-gap: 3rem;
+    justify-items: center;
+
+    @media only screen and (max-width: $bp-small) {
+      grid-template-columns: auto;
+    }
+
+    img {
+      max-height: 6rem;
+      max-width: 100%;
+      filter: brightness(70%);
+    }
+  }
+}

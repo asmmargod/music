@@ -1,0 +1,107 @@
+.albums {
+  background-color: $color-accent;
+  grid-column: center-start / center-end;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(30rem, 1fr));
+  grid-gap: 6rem;
+
+  @media only screen and (max-width: $bp-medium) {
+    margin: 5rem;
+  }
+}
+
+.album {
+  background-color: $color-violet-dark;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-row-gap: 3rem;
+  border-radius: 0.2rem;
+  box-shadow: $shadow-black;
+  position: relative;
+  transition: all 0.7s;
+
+  @media only screen and (max-width: $bp-medium-1) {
+    margin: 2rem;
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    margin: 5rem;
+  }
+  &:hover {
+    transform: translateY(-1rem);
+    box-shadow: $shadow-black-big;
+  }
+
+  &__pic {
+    border-radius: 0.2rem;
+    width: 100%;
+    grid-row: 1 / 2;
+    grid-column: 1 / -1;
+    z-index: 1;
+  }
+
+  &__ticket {
+    grid-row: 1 / 2;
+    grid-column: 2 / 3;
+    fill: $color-background-gold;
+    height: 5rem;
+    width: 5rem;
+    z-index: 2;
+    justify-self: end;
+    margin: 1rem;
+  }
+
+  &__name {
+    grid-column: 1 / -1;
+    grid-row: 1 / 2;
+    z-index: 3;
+
+    width: 80%;
+    justify-self: center;
+    align-self: end;
+    font-family: $font-headers;
+    font-size: 2.5rem;
+    text-align: center;
+    padding: 2rem 0.5rem;
+    background-image: linear-gradient(to bottom left, $color-violet-dark, $color-red-dark);
+    box-shadow: $shadow-black;
+    border-radius: 0.5rem;
+    color: $color-font-dark;
+    text-shadow: $shadow-black;
+    font-weight: 300;
+    transform: translateY(50%);
+  }
+
+  &__band,
+  &__country {
+    margin-top: 2.5rem;
+  }
+
+  &__band,
+  &__country,
+  &__genre,
+  &__info {
+    font-size: 1.5rem;
+    font-weight: 200;
+    margin-left: 1rem;
+    // display: flex;
+    // align-items: center;
+    svg {
+      fill: url(#album-gradient);
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+
+  &__btn {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 100%;
+  }
+
+  &__link {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: 80%;
+  }
+}

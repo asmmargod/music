@@ -1,0 +1,76 @@
+.singers {
+  background-color: $color-accent-dark;
+  font-family: "BlackDahlia";
+  grid-column: col-start 7 / full-end;
+  clip-path: polygon(0 0, 100% 0, 100% 90%, 0 95%);
+  position: relative;
+  top: 0;
+  left: -0.05rem;
+  padding: 3rem;
+
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  justify-items: center;
+  grid-row-gap: 2rem;
+
+  @media only screen and (max-width: $bp-medium) {
+    grid-column: 1 / -1;
+    //placing singers below header
+    padding: 12rem 0 9rem 0;
+    margin-top: -4.2rem;
+    z-index: -1;
+    clip-path: polygon(0 0, 100% 0, 100% 95%, 50% 100%, 0 95%);
+  }
+
+  @media only screen and (max-width: $bp-small) {
+    margin-top: -4rem;
+    padding: 15rem 0 9rem 0;
+  }
+
+  &__heading {
+    color: $color-red-dark;
+    font-family: "EvilSound";
+    font-size: 3rem;
+    font-weight: 200;
+    margin-top: -5rem;
+    text-shadow: $shadow-black;
+  }
+
+  &__list {
+    display: grid;
+    grid-template-columns: min-content max-content;
+    grid-column-gap: 2rem;
+    grid-row-gap: 5vh;
+    align-items: center;
+
+    @media only screen and (max-width: $bp-medium) {
+      grid-template-columns: repeat(3, min-content 20rem);
+      //making the singers horizontal
+    }
+
+    @media only screen and (max-width: $bp-medium-1) {
+      grid-template-columns: min-content max-content;
+    }
+  }
+
+  &__img {
+    width: 9rem;
+    border-radius: 50%;
+    box-shadow: $shadow-black-big;
+    display: block;
+    transition: all 1.7s cubic-bezier(0.64, 0.34, 0.21, 1.88);
+
+    &:hover {
+      transform: scale(1.1) rotate(5deg);
+      box-shadow: $shadow-black;
+    }
+  }
+
+  &__fame {
+    text-transform: uppercase;
+    color: $color-font-dark;
+
+    font-family: $font-main;
+  }
+}
